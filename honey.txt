@@ -1,0 +1,16 @@
+yum install honeyd
+vi /etc/honeyd.conf
+create windows
+set windows personality "Microsoft Windows NT 4.0 Server SP5-SP6"
+add windows tcp port 80 open
+add windows tcp port 139 open
+add windows tcp port 137 open
+add windows udp port 137 open
+add windows udp port 135 open
+set windows default tcp action reset
+set windows default udp action reset
+set windows ethernet “00:00:24:ab:8c:12”
+bind 172.16.8.13 to p4p1
+honeyd -i p4p1  -d -f  honeyd.conf 
+anotherterminal nmap -p 135,139,445,1337 172.16.8.13
+

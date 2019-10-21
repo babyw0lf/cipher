@@ -1,0 +1,20 @@
+cd /usr/src
+wget https://www.snort.org/downloads/snort/snort-2.9.8.3.tar.gz
+tar xvzf snort-2.9.8.3.tar.gz
+yum install libpcap*  pcre*  -y
+cd snort-2.9.8.3 
+./configure 
+make 
+make install
+snort --version
+mkdir /etc/snort 
+mkdir /etc/snort/rules 
+mkdir /var/log/snort 
+echo "include /etc/snort/rules/icmp.rules" >> /etc/snort/snort.conf
+echo "alert icmp any any -> any any (msg:"ICMP Packet"; sid:477; rev:3;)" >> /etc/snort/rules/icmp.rules 
+snort -i p4p1 -c /etc/snort/snort.conf  -l /var/log/snort/ 
+ping www.goole.com
+cat /var/log/snort/alert
+
+
+

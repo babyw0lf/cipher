@@ -1,0 +1,6 @@
+yum install gnupg
+gpg --gen-key
+gpg --gen-revoke ben10@xyz.in
+gpg -r ben10@xyz.in topSecret.txt 
+gpg -o topSecret.txt -d topSecret.txt.gpg
+
